@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spotify_ui/data/data.dart';
+import 'package:flutter_spotify_ui/logic/track_cubit.dart';
 
 class TracksList extends StatelessWidget {
   final List<Song> tracks;
@@ -9,6 +11,10 @@ class TracksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DataTable(
+        showCheckboxColumn: false,
+        dataRowHeight: 54.0,
+        headingTextStyle:
+            Theme.of(context).textTheme.overline!.copyWith(fontSize: 12.0),
         columns: const [
           DataColumn(label: Text('TITLE')),
           DataColumn(label: Text('ARTIST')),
@@ -16,16 +22,21 @@ class TracksList extends StatelessWidget {
           DataColumn(label: Icon(Icons.access_time)),
         ],
         rows: tracks.map((e) {
-          return DataRow(cells: [
-            DataCell(Text(e.title,
-                style: TextStyle(color: Theme.of(context).iconTheme.color))),
-            DataCell(Text(e.artist,
-                style: TextStyle(color: Theme.of(context).iconTheme.color))),
-            DataCell(Text(e.album,
-                style: TextStyle(color: Theme.of(context).iconTheme.color))),
-            DataCell(Text(e.duration,
-                style: TextStyle(color: Theme.of(context).iconTheme.color))),
-          ]);
+          final selected = context.watch<TrackCubit>().state.track?.id == e.id;
+          final textStyle = TextStyle(
+            color: selected
+                ? Theme.of(context).accentColor
+                : Theme.of(context).iconTheme.color,
+          );
+          return DataRow(
+              cells: [
+                DataCell(Text(e.title, style: textStyle)),
+                DataCell(Text(e.artist, style: textStyle)),
+                DataCell(Text(e.album, style: textStyle)),
+                DataCell(Text(e.duration, style: textStyle)),
+              ],
+              selected: selected,
+              onSelectChanged: (_) => context.read<TrackCubit>().play(e));
         }).toList());
   }
 }
