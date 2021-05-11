@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spotify_ui/data/data.dart';
+import 'package:flutter_spotify_ui/widgets/widgets.dart';
 
 class PlaylistScreen extends StatefulWidget {
   final Playlist playlist;
@@ -28,9 +29,10 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFFAF1018),
         elevation: 0,
         leadingWidth: 140.0,
         leading: Padding(
@@ -119,7 +121,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
               controller: _scrollController,
               children: [
-
+                PlaylistHeader(playlist: widget.playlist),
               ],
             ),
           )),
