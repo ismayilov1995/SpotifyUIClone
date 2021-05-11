@@ -122,6 +122,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               controller: _scrollController,
               children: [
                 PlaylistHeader(playlist: widget.playlist),
+                TracksList(tracks: widget.playlist.songs),
               ],
             ),
           )),
