@@ -65,7 +65,7 @@ class _PlaylistButtons extends StatelessWidget {
           child: Text('PLAY'),
           style: TextButton.styleFrom(
             padding:
-                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 48.0),
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 40.0),
             shape: StadiumBorder(),
             backgroundColor: Theme.of(context).accentColor,
             primary: Theme.of(context).iconTheme.color,
