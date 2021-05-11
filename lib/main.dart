@@ -78,16 +78,7 @@ class Shell extends StatelessWidget {
               Expanded(child: PlaylistScreen(playlist: lofihiphopPlaylist))
             ],
           )),
-          Container(
-            height: 84.0,
-            width: double.infinity,
-            color: Colors.blue,
-            child: BlocBuilder<TrackCubit, TrackState>(
-              builder: (context, state) {
-                return Text(state.track?.title ?? 'Nothing play right now');
-              },
-            ),
-          )
+          CurrentTrack()
         ],
       ),
     );
